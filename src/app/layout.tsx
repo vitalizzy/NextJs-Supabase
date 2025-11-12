@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components//theme-provider";
 import { siteConfig } from "@/config//site";
 import { cn } from "@/utils/cn";
+import { LanguageProvider } from "@/context/language-context";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -80,14 +81,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(inter.className)}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </LanguageProvider>
 
         <Toaster position="top-center" reverseOrder={false} />
       </body>

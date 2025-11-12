@@ -1,62 +1,56 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Lock } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/context/language-context";
 import BentoGridSection from "./_components/bento-grid-section";
 
 const HomePage = () => {
+  const { t } = useLanguage();
+
   return (
     <div>
       <section className="grid place-content-center place-items-center gap-6 text-center">
         <Badge size="sm">
-          Minimal Template with <Lock className="ml-1 w-4 h-4" />
+          {t.home.badge} <Lock className="ml-1 w-4 h-4" />
         </Badge>
 
-        <h1 className="max-w-6xl">
-          Next.js 14 Supabase Authentication Playground: Building Modern Web
-          Experiences Together
-        </h1>
+        <h1 className="max-w-6xl">{t.home.title}</h1>
 
-        <p className="max-w-3xl">
-          Explore the World of Open Source Coding and Secure Web Development.
-          Every Line of Code is Open Source - Contribute to the Future of Web
-          Development with Supabase Authentication!
-        </p>
+        <p className="max-w-3xl">{t.home.description}</p>
 
         <div className="flex items-center gap-3">
-          <Button className="rounded-full">
-            <Link href="/login">Get Started</Link>
+          <Button className="rounded-full" asChild>
+            <Link href="/login">{t.home.getStarted}</Link>
           </Button>
 
-          <Button variant="outline" className="rounded-full">
+          <Button variant="outline" className="rounded-full" asChild>
             <a href="https://github.com/SarathAdhi/next-supabase-auth">
-              GitHub
+              {t.home.github}
             </a>
           </Button>
         </div>
       </section>
 
       <section className="space-y-12">
-        <h2 className="text-center">Key Features</h2>
+        <h2 className="text-center">{t.home.keyFeatures}</h2>
 
         <BentoGridSection />
       </section>
 
       <section className="space-y-6 text-center">
-        <h2>Completely Open Source</h2>
+        <h2>{t.home.openSource}</h2>
 
-        <p className="mx-auto max-w-2xl">
-          The code for this project is completely open source and available on
-          GitHub. Join the community and contribute to the future of web
-          development!
-        </p>
+        <p className="mx-auto max-w-2xl">{t.home.openSourceDescription}</p>
 
         <Button size="sm" asChild>
           <a
             href="https://github.com/SarathAdhi/next-supabase-auth"
             target="_blank"
           >
-            View on GitHub
+            {t.home.viewOnGithub}
           </a>
         </Button>
       </section>

@@ -1,18 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
+import { LanguageToggle } from "./language-toggle";
+import { UserMenu } from "./user-menu";
 
-import { signOut } from "@/app/actions";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { createClient } from "@/utils/supabase/server";
-import { Lock, User } from "lucide-react";
+import { Lock } from "lucide-react";
 
 const Navbar = async () => {
   const supabase = createClient();
@@ -31,50 +24,14 @@ const Navbar = async () => {
 
         <div className="flex items-center gap-3">
           {user ? (
-            <>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button size="icon" variant="ghost">
-                    <User />
-                  </Button>
-                </DropdownMenuTrigger>
-
-                <DropdownMenuContent sideOffset={5}>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-
-                  <DropdownMenuSeparator />
-
-                  <DropdownMenuItem asChild>
-                    <Link className="cursor-pointer" href="/profile">
-                      Profile
-                    </Link>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuSeparator />
-
-                  <DropdownMenuItem className="p-0" asChild>
-                    <form action={signOut}>
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        className="rounded-sm w-full"
-                        type="submit"
-                      >
-                        Logout
-                      </Button>
-                    </form>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
+            <UserMenu />
           ) : (
-            <>
-              <Button asChild>
-                <Link href="/login">Login</Link>
-              </Button>
-            </>
+            <Button asChild>
+              <Link href="/login">Login</Link>
+            </Button>
           )}
 
+          <LanguageToggle />
           <ModeToggle />
         </div>
       </div>

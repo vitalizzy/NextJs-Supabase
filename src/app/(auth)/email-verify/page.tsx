@@ -1,6 +1,13 @@
+"use client";
+
+import { useLanguage } from "@/context/language-context";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 const EmailSuccessPage = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="h-screen grid place-content-center">
       <div className="max-w-md text-center space-y-3">
@@ -12,12 +19,9 @@ const EmailSuccessPage = () => {
           alt="Email Verification"
         />
 
-        <h2>Check your email</h2>
+        <h2>{t.emailVerify.title}</h2>
 
-        <p>
-          To confirm your email address, tap the link in the email we sent to
-          you.
-        </p>
+        <p>{t.emailVerify.description}</p>
       </div>
     </div>
   );

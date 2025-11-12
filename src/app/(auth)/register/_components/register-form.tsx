@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { InputForm } from "@/components/ui/input/input-form";
 import { createClient } from "@/utils/supabase/client";
+import { useLanguage } from "@/context/language-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -26,6 +27,7 @@ const defaultValues: RegisterValuesType = {
 
 const RegisterForm = () => {
   const router = useRouter();
+  const { t } = useLanguage();
 
   const supabase = createClient();
 
@@ -46,7 +48,7 @@ const RegisterForm = () => {
 
     console.log({ data });
 
-    toast.success("Verification email sent. Check your mail.");
+    toast.success(t.register.verificationSent);
 
     router.replace("/email-verify");
   }
@@ -58,22 +60,22 @@ const RegisterForm = () => {
         className="w-full flex flex-col gap-y-4"
       >
         <InputForm
-          label="Email"
+          label={t.register.email}
           name="email"
-          placeholder="hello@sarathadhi.com"
+          placeholder={t.register.emailPlaceholder}
           description=""
           required
         />
 
         <InputForm
           type="password"
-          label="Password"
+          label={t.register.password}
           name="password"
           description=""
           required
         />
 
-        <Button>Register</Button>
+        <Button>{t.register.button}</Button>
       </form>
     </Form>
   );

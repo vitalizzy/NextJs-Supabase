@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { InputForm } from "@/components/ui/input/input-form";
 import { createClient } from "@/utils/supabase/client";
+import { useLanguage } from "@/context/language-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -26,6 +27,7 @@ const defaultValues: LoginValuesType = {
 
 const LoginForm = () => {
   const router = useRouter();
+  const { t } = useLanguage();
 
   const supabase = createClient();
 
@@ -39,7 +41,7 @@ const LoginForm = () => {
 
     if (error) return toast.error(error.message);
 
-    toast.success("Login successful");
+    toast.success(t.login.loginSuccess);
 
     router.refresh();
   }
@@ -51,22 +53,22 @@ const LoginForm = () => {
         className="w-full flex flex-col gap-y-4"
       >
         <InputForm
-          label="Email"
+          label={t.login.email}
           name="email"
-          placeholder="hello@sarathadhi.com"
+          placeholder="hello@example.com"
           description=""
           required
         />
 
         <InputForm
           type="password"
-          label="Password"
+          label={t.login.password}
           name="password"
           description=""
           required
         />
 
-        <Button>Login</Button>
+        <Button>{t.login.button}</Button>
       </form>
     </Form>
   );
